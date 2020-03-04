@@ -14,9 +14,13 @@ export class ResultList extends React.Component {
 
   render() {
     let resultNodes = this.props.data.map(function(result, index) {
-      return <div key={result.description} >
-        {result.description}
-      </div>
+      return (
+        <div>
+          {result.date}
+          {' '}
+          {result.description}
+        </div>
+      )
     });
     return (
       <div>
@@ -34,14 +38,10 @@ class App extends React.Component {
     this.state = {
       offset: 0,
       data: [],
-      // elements: [],
-      // perPage: 10,
-      // currentPage: 0,
-      // pageCount: 0,
+      perPage: 10,
+      elements: [],
+      currentPage: 0,
     }
-
-    this.loadResultsFromServer = this.loadResultsFromServer.bind(this);
-
   }
 
   loadResultsFromServer() {
@@ -49,21 +49,24 @@ class App extends React.Component {
       url: 'http://localhost:3000/events',
       dataType: 'json',
       type: 'GET',
-
+      crossDomain: true,
       success: data => {
         console.log('success data', data)
         this.setState({
-          //@dev console log here
-          data: data.data,
-          //@dev what is meta and total here?
-          pageCount: Math.ceil(data.meta.total_count / data.meta.limit)
-        });
+          data: data,
+          pageCount: Math.ceil(data.length / this.state.perPage),
+        }, () => this.setElementsForCurrentPage());
       },
-      // (xhr, status, err)
       error: (xhr, status, err) => {
         console.error(err.toString());
       }
     });
+  }
+
+  setElementsForCurrentPage() {
+    let elements = this.state.data.slice(this.state.offset, this.state.offset + this.state.perPage).map(post => ( <Result data={post} />)
+    );
+    this.setState({ elements: elements })
   }
 
   componentDidMount() {
@@ -82,26 +85,29 @@ class App extends React.Component {
 
   render() {
     return (
-      <div className="resultsBox">
-        <ResultList data={this.state.data} />
-        <ReactPaginate
-          previousLabel={'previous'}
-          nextLabel={'next'}
-          breakLabel={'...'}
-          breakClassName={'break-me'}
-          pageCount={this.state.pageCount}
-          marginPagesDisplayed={2}
-          pageRangeDisplayed={5}
-          onPageChange={this.handlePageClick}
-          containerClassName={'pagination'}
-          subContainerClassName={'pages pagination'}
-          activeClassName={'active'}
-        />
+      <div>
+        <Search />
+        <div className="resultsBox">
+          <ResultList data={this.state.data} />
+          <ReactPaginate
+            previousLabel={'previous'}
+            nextLabel={'next'}
+            breakLabel={'...'}
+            breakClassName={'break-me'}
+            pageCount={this.state.pageCount}
+            marginPagesDisplayed={2}
+            pageRangeDisplayed={5}
+            onPageChange={this.handlePageClick}
+            containerClassName={'pagination'}
+            subContainerClassName={'pages pagination'}
+            activeClassName={'active'}
+          />
+        </div>
       </div>
     );
   }
 }
 
 
-ReactDOM.render(<App perPage={10} />, document.getElementById('app'));
+ReactDOM.render(<App />, document.getElementById('app'));
 

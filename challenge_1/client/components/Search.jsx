@@ -7,14 +7,12 @@ class Search extends React.Component {
 
   render() {
     return (
-      <div>
         <form>
           <label>
-            Search here
-            <input />
+            Search:
+            <input type="text" />
           </label>
         </form>
-      </div>
     )
   }
 }
