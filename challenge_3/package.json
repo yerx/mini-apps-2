@@ -1,0 +1,32 @@
+{
+  "name": "challenge_3",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js",
+    "dev:start": "nodemon server.js",
+    "dev:build": "webpack --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yerx/hrr43-mini-apps-2/tree/master/challenge_3"
+  },
+  "author": "Yer Xiong",
+  "license": "ISC",
+  "dependencies": {
+    "@babel/core": "^7.8.7",
+    "@babel/preset-env": "^7.8.7",
+    "@babel/preset-react": "^7.8.3",
+    "babel-loader": "^8.0.6",
+    "eslint": "^6.8.0",
+    "express": "^4.17.1",
+    "nodemon": "^2.0.2",
+    "path": "^0.12.7",
+    "react": "^16.13.0",
+    "react-dom": "^16.13.0",
+    "webpack": "^4.42.0",
+    "webpack-cli": "^3.3.11"
+  }
+}
