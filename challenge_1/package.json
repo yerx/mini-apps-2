@@ -17,7 +17,7 @@
     "@babel/plugin-proposal-class-properties": "^7.8.3",
     "@babel/preset-env": "^7.8.6",
     "@babel/preset-react": "^7.8.3",
-    "babel-loader": "^8.0.6",
+    "babel-loader": "^8.3.0",
     "bootstrap": "^4.4.1",
     "jquery": "^3.4.1",
     "json-server": "^0.16.1",
@@ -25,7 +25,7 @@
     "react-bootstrap": "^1.0.0-beta.17",
     "react-dom": "^16.13.0",
     "react-paginate": "^6.3.2",
-    "webpack": "^4.42.0",
-    "webpack-cli": "^3.3.11"
+    "webpack": "^5.75.0",
+    "webpack-cli": "^5.0.1"
   }
 }
